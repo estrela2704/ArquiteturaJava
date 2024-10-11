@@ -2,15 +2,35 @@ package br.edu.infnet.felipe.model.domain.produto;
 
 import br.edu.infnet.felipe.model.domain.categoria.Categoria;
 import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
+import java.math.BigDecimal;
 
-public abstract class Produto {
+public class Produto {
 	
+	private String nome;
 	private String descricao;
 	private int codigo;
-	private float preco;
+	private BigDecimal preco;
 	private boolean estoque;
 	private Vendedor vendedor;
 	private Categoria categoria;
+	
+	public Produto(String nome, String descricao, int codigo, BigDecimal preco, boolean estoque, Vendedor vendedor,
+			Categoria categoria) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.codigo = codigo;
+		this.preco = preco;
+		this.estoque = estoque;
+		this.vendedor = vendedor;
+		this.categoria = categoria;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	public String getDescricao() {
 		return descricao;
@@ -24,10 +44,10 @@ public abstract class Produto {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public float getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 	public boolean isEstoque() {

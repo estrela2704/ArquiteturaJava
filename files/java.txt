@@ -1,0 +1,4 @@
+V;05484257107;Felipe;Estrela;felipeestrelatv@gmail.com;2003-04-27;61991248170;73070045
+P;Iphone 15;Celular Apple IPhone 15 Pro Max;2154;7999.99;true;Apple;Iphone 15;05484257107
+P;Macbook Air M2;Notebook Apple Macbook Air M2;2154;11999.99;true;Apple;Macbook Air;05484257107
+P;Samsung Galaxy s22;Celular Samsung s22;2154;3999.99;true;Samsung;Galaxy s22;05484257107

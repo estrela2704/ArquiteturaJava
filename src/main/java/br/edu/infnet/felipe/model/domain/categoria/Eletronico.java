@@ -1,11 +1,15 @@
 package br.edu.infnet.felipe.model.domain.categoria;
 
-import java.util.List;
-
 public class Eletronico extends Categoria {
 
 	private String marca;
 	private String modelo;
+	
+	public Eletronico(String marca, String modelo) {
+		super("Eletrônico", "Produtos Eletrônicos");
+		this.marca = marca;
+		this.modelo = modelo;
+	}
 	
 	public String getMarca() {
 		return marca;

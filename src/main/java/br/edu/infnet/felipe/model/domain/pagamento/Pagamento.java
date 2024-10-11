@@ -7,6 +7,7 @@ import br.edu.infnet.felipe.model.enums.MetodoPagamento;
 import br.edu.infnet.felipe.model.enums.StatusPagamento;
 
 public class Pagamento {
+	
 	private Cliente cliente;
 	private float valor;
 	private LocalDate dataPagamento;
