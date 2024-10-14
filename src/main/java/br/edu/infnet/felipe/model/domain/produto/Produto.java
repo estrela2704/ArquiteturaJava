@@ -1,6 +1,5 @@
 package br.edu.infnet.felipe.model.domain.produto;
 
-import br.edu.infnet.felipe.model.domain.categoria.Categoria;
 import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
 import java.math.BigDecimal;
 

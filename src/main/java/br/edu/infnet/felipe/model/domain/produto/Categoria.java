@@ -1,4 +1,4 @@
-package br.edu.infnet.felipe.model.domain.categoria;
+package br.edu.infnet.felipe.model.domain.produto;
 
 public abstract class Categoria {
 
