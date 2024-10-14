@@ -1,7 +1,10 @@
 package br.edu.infnet.felipe.model.domain.produto;
 
-import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
 
 public class Produto {
 	
@@ -10,6 +13,8 @@ public class Produto {
 	private int codigo;
 	private BigDecimal preco;
 	private boolean estoque;
+	
+	@JsonBackReference
 	private Vendedor vendedor;
 	private Categoria categoria;
 	

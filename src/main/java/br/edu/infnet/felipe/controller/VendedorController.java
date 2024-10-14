@@ -17,6 +17,7 @@ public class VendedorController {
 	
 	@GetMapping("/vendedores")
 	public Collection<Vendedor> listar(){
+	    System.out.println("Listando vendedores: " + vendedorService.listar() + " Tamanho: " + vendedorService.listar().size());
 		return vendedorService.listar();
 	}
 	

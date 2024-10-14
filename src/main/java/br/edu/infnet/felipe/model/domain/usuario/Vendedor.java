@@ -1,4 +1,5 @@
 package br.edu.infnet.felipe.model.domain.usuario;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import br.edu.infnet.felipe.model.domain.produto.Produto;
 
 public class Vendedor extends Pessoa {
 	
+	@JsonManagedReference
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	public Vendedor(String cpf, String nome, String sobrenome, String email, LocalDate dataNascimento, String telefone,
@@ -21,15 +23,7 @@ public class Vendedor extends Pessoa {
 	
 	public void addProduto(Produto produto) {
 		this.produtos.add(produto);
-	}
-	
-	@Override
-	public String toString() {
-	    return "Vendedor{" +
-	            "nome='" + this.getNome() + '\'' +
-	            ", sobrenome='" + this.getSobrenome() + '\'' +
-	            ", email='" + this.getEmail() + '\'' +
-	            '}';
+		produto.setVendedor(this);
 	}
 
 }

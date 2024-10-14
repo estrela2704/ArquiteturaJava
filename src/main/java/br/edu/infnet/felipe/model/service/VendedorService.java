@@ -13,14 +13,13 @@ import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
 @Service
 public class VendedorService {
 
-	Map<String, Vendedor> mapVendedores = new HashMap<String, Vendedor>();
+	private Map<String, Vendedor> mapVendedores = new HashMap<String, Vendedor>();
 	
 	public void adicionar(Vendedor vendedor) {
 		mapVendedores.put(vendedor.getCpf(), vendedor);
 	}
 	
 	public Collection<Vendedor> listar(){
-	    System.out.println("Listando vendedores: " + mapVendedores.values() + " Tamanho: " + mapVendedores.size());
 		return mapVendedores.values();
 	}
 	
