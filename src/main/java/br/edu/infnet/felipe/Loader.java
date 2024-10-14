@@ -78,32 +78,11 @@ public class Loader implements ApplicationRunner {
 			 default: 
 				break;
 			}
-			
 			linha = leitura.readLine();
 		}
 		
 		leitura.close();
-		
-		for(Vendedor vendedorI: this.vendedorService.listar()) {
-			System.out.println("Nome do vendedor: " + vendedorI.getNome() + " " + vendedorI.getSobrenome());
-			System.out.println("CPF do vendedor: " + vendedorI.getCpf());
-			System.out.println("Email do vendedor: " + vendedorI.getEmail());
-			System.out.println("Data de nascimento do vendedor: " + vendedorI.getDataNascimento());
-			System.out.println("telefone do vendedor: " + vendedorI.getTelefone());
-			
-			System.out.println("Produtos do vendedor: ");
-			
-			for(Produto produto: this.vendedorService.listarProdutosVendedor(vendedor)) {
-				System.out.println("Nome do produto: " + produto.getNome());
-				System.out.println("Descrição do produto: " + produto.getDescricao());
-				System.out.println("Codigo do produto: " + produto.getCodigo());
-				System.out.println("Codigo do produto: " + produto.getCodigo());
-				System.out.println("Preço do produto: R$" + produto.getPreco());
-				System.out.println("Categoria do produto: " + produto.getCategoria().getNome());
-
-			}
-			
-		}
+	
 		
 	}
 

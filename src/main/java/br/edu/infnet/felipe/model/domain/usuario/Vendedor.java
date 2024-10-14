@@ -22,5 +22,14 @@ public class Vendedor extends Pessoa {
 	public void addProduto(Produto produto) {
 		this.produtos.add(produto);
 	}
+	
+	@Override
+	public String toString() {
+	    return "Vendedor{" +
+	            "nome='" + this.getNome() + '\'' +
+	            ", sobrenome='" + this.getSobrenome() + '\'' +
+	            ", email='" + this.getEmail() + '\'' +
+	            '}';
+	}
 
 }

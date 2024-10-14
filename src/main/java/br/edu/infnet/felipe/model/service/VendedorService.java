@@ -20,6 +20,7 @@ public class VendedorService {
 	}
 	
 	public Collection<Vendedor> listar(){
+	    System.out.println("Listando vendedores: " + mapVendedores.values() + " Tamanho: " + mapVendedores.size());
 		return mapVendedores.values();
 	}
 	
