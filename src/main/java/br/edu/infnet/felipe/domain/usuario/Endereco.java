@@ -1,4 +1,4 @@
-package br.edu.infnet.felipe.model.domain.usuario;
+package br.edu.infnet.felipe.domain.usuario;
 
 public class Endereco {
 	
@@ -8,6 +8,16 @@ public class Endereco {
 	private String bairro;
 	private String localidade;
 	private String uf;
+	
+	public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade,
+			String uf) {
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.localidade = localidade;
+		this.uf = uf;
+	}
 	
 	public String getCep() {
 		return cep;

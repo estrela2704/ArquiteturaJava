@@ -1,25 +1,27 @@
-package br.edu.infnet.felipe.model.domain.produto;
+package br.edu.infnet.felipe.domain.produto;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import br.edu.infnet.felipe.model.domain.usuario.Vendedor;
+import br.edu.infnet.felipe.domain.usuario.Vendedor;
 
 public class Produto {
 	
+	private UUID id;
 	private String nome;
 	private String descricao;
 	private int codigo;
 	private BigDecimal preco;
 	private boolean estoque;
 	
-	@JsonBackReference
 	private Vendedor vendedor;
 	private Categoria categoria;
 	
 	public Produto(String nome, String descricao, int codigo, BigDecimal preco, boolean estoque, Vendedor vendedor,
 			Categoria categoria) {
+		this.id = UUID.randomUUID();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.codigo = codigo;
@@ -27,6 +29,10 @@ public class Produto {
 		this.estoque = estoque;
 		this.vendedor = vendedor;
 		this.categoria = categoria;
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 	
 	public String getNome() {
@@ -60,9 +66,11 @@ public class Produto {
 	public void setEstoque(boolean estoque) {
 		this.estoque = estoque;
 	}
-	public Vendedor getVendedor() {
-		return vendedor;
+	
+	public String getVendedor() {
+		return vendedor.getId().toString();
 	}
+	
 	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
 	}

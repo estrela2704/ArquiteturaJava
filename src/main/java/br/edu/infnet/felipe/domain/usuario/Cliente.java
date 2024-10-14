@@ -1,4 +1,4 @@
-package br.edu.infnet.felipe.model.domain.usuario;
+package br.edu.infnet.felipe.domain.usuario;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
-package br.edu.infnet.felipe.model.domain.produto;
+package br.edu.infnet.felipe.domain.produto;
 
-public abstract class Categoria {
+public class Categoria {
 
 	private String nome;
 	private String descricao;

@@ -1,10 +1,10 @@
-package br.edu.infnet.felipe.model.domain.pagamento;
+package br.edu.infnet.felipe.domain.pagamento;
 
 import java.time.LocalDate;
 
-import br.edu.infnet.felipe.model.domain.usuario.Cliente;
-import br.edu.infnet.felipe.model.enums.MetodoPagamento;
-import br.edu.infnet.felipe.model.enums.StatusPagamento;
+import br.edu.infnet.felipe.domain.enums.MetodoPagamento;
+import br.edu.infnet.felipe.domain.enums.StatusPagamento;
+import br.edu.infnet.felipe.domain.usuario.Cliente;
 
 public class Pagamento {
 	

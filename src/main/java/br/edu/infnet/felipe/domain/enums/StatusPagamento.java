@@ -1,4 +1,4 @@
-package br.edu.infnet.felipe.model.enums;
+package br.edu.infnet.felipe.domain.enums;
 
 public enum StatusPagamento {
 	ANALISE,

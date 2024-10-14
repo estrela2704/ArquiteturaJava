@@ -1,6 +1,6 @@
-package br.edu.infnet.felipe.model.domain.venda;
+package br.edu.infnet.felipe.domain.venda;
 
-import br.edu.infnet.felipe.model.enums.StatusCompra;
+import br.edu.infnet.felipe.domain.enums.StatusCompra;
 
 public class OrdemCompra {
 	private Carrinho carrinho;

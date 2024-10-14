@@ -1,9 +1,11 @@
-package br.edu.infnet.felipe.model.domain.usuario;
+package br.edu.infnet.felipe.domain.usuario;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public abstract class Pessoa {
-
+	
+	private UUID id;
 	private String nome;
 	private String sobrenome;
 	private String email;
@@ -15,6 +17,7 @@ public abstract class Pessoa {
 	
 	public Pessoa(String cpf, String nome, String sobrenome, String email, LocalDate dataNascimento, String telefone,
 			Endereco endereco) {
+		this.id = UUID.randomUUID();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
@@ -67,6 +70,10 @@ public abstract class Pessoa {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public UUID getId() {
+		return id;
 	}
 	
 }
