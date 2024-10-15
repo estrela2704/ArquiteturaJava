@@ -37,7 +37,7 @@ public class ProdutoService {
 			
 			vendedorService.adicionarProduto(vendedor, produto);
 
-			repository.salvar(produto);
+			salvar(produto);
 			
 			return produto;
 		}
@@ -45,13 +45,17 @@ public class ProdutoService {
 		return null;
 
 	}
+	
+	public void salvar(Produto produto) {
+		repository.salvar(produto);
+	}
 
 	public Collection<Produto> listar() {
 		return repository.listar();
 	}
 
-	public Produto buscarPorID(String id) {
-		return repository.buscarPorID(UUID.fromString(id));
+	public Produto buscarPorID(UUID id) {
+		return repository.buscarPorID(id);
 	}
 
 }

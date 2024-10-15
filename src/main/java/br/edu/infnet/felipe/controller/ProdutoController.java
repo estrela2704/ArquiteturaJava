@@ -1,6 +1,7 @@
 package br.edu.infnet.felipe.controller;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class ProdutoController {
 
 	@GetMapping("/produto/{id}")
 	public ResponseEntity<Produto> buscarPorID(@PathVariable String id) {
-		Produto produto = produtoService.buscarPorID(id);
+		Produto produto = produtoService.buscarPorID(UUID.fromString(id));
 		return ResponseEntity.ok(produto);
 	}
 

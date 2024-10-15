@@ -26,8 +26,30 @@ public class Carrinho {
 		return produtos;
 	}
 	
-	public void addProduto(Produto produto) {
-		this.produtos.add(produto);
+	public void addProduto(Produto produto, int quantidade) {
+		for(int i = 0; i < quantidade; i++) {
+			this.produtos.add(produto);
+		}
+	}
+	
+	public void removerProduto(Produto produto, int quantidade) {
+		int quantidadeProduto = getQuantidadeProdutoCarrinho(produto);
+		if(quantidade <= produtos.size() && quantidade <= quantidadeProduto) {
+			for(int i = 0; i < quantidade; i++) {
+				this.produtos.remove(produto);
+			}	
+		}
+	}
+	
+	public int getQuantidadeProdutoCarrinho(Produto produto) {
+		int quantidade = 0;
+		for(Produto objProduto: produtos) {
+			if(objProduto.getId() == produto.getId()) {
+				quantidade++;
+			}
+		}
+		
+		return quantidade;
 	}
 	
 	public Cliente getComprador() {
