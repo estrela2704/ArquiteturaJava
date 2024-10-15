@@ -15,7 +15,6 @@ public class Produto {
 	private int codigo;
 	private BigDecimal preco;
 	private boolean estoque;
-	
 	private Vendedor vendedor;
 	private Categoria categoria;
 	

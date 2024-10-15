@@ -2,7 +2,9 @@ package br.edu.infnet.felipe.controller.request;
 
 import java.time.LocalDate;
 
-public class CriarVendedorDTO {
+import br.edu.infnet.felipe.domain.enums.UsuarioRole;
+
+public class CriarUsuarioDTO {
 
 	private String nome;
 	private String sobrenome;
@@ -16,12 +18,13 @@ public class CriarVendedorDTO {
 	private String bairro;
 	private String localidade;
 	private String uf;
+	private UsuarioRole role;
+	private String senha;
 	
-	public CriarVendedorDTO(String nome, String sobrenome, String email,
+	public CriarUsuarioDTO(String nome, String sobrenome, String email,
 			LocalDate dataNascimento, String telefone, String cpf, String cep,
 			String logradouro, String complemento, String bairro,
-			String localidade, String uf) {
-		super();
+			String localidade, String uf, UsuarioRole role, String senha) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
@@ -34,6 +37,8 @@ public class CriarVendedorDTO {
 		this.bairro = bairro;
 		this.localidade = localidade;
 		this.uf = uf;
+		this.role = role;
+		this.senha = senha;
 	}
 
 	public String getNome() {
@@ -84,8 +89,13 @@ public class CriarVendedorDTO {
 		return uf;
 	}
 	
-	
-	
+	public UsuarioRole getRole() {
+		return role;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
 	
 	
 }

@@ -5,22 +5,18 @@ import java.util.UUID;
 
 public abstract class Pessoa {
 	
-	private UUID id;
 	private String nome;
 	private String sobrenome;
-	private String email;
 	private LocalDate dataNascimento;
 	private String telefone;
 	private Endereco endereco;
 	private String cpf;
 
 	
-	public Pessoa(String cpf, String nome, String sobrenome, String email, LocalDate dataNascimento, String telefone,
+	public Pessoa(String cpf, String nome, String sobrenome, LocalDate dataNascimento, String telefone,
 			Endereco endereco) {
-		this.id = UUID.randomUUID();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 		this.endereco = endereco;
@@ -57,12 +53,6 @@ public abstract class Pessoa {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getCpf() {
 		return cpf;
@@ -72,8 +62,4 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 
-	public UUID getId() {
-		return id;
-	}
-	
 }

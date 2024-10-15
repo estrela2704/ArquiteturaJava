@@ -24,21 +24,26 @@ public class ProdutoService {
 	public Produto criar(CriarProdutoDTO criarProdutoDTO) {
 
 		Vendedor vendedor = vendedorService
-				.buscarPorID(criarProdutoDTO.getIdVendedor());
+				.buscarPorID(UUID.fromString(criarProdutoDTO.getIdVendedor()));
 		
-		Categoria categoria = new Categoria(criarProdutoDTO.getNomeCategoria(),
-				criarProdutoDTO.getDescricaoCategoria());
-		
-		Produto produto = new Produto(criarProdutoDTO.getNome(),
-				criarProdutoDTO.getDescricao(), criarProdutoDTO.getCodigo(),
-				criarProdutoDTO.getPreco(), criarProdutoDTO.isEstoque(),
-				vendedor, categoria);
-		
-		vendedorService.adicionarProduto(vendedor, produto);
+		if(vendedor != null) {
+			Categoria categoria = new Categoria(criarProdutoDTO.getNomeCategoria(),
+					criarProdutoDTO.getDescricaoCategoria());
+			
+			Produto produto = new Produto(criarProdutoDTO.getNome(),
+					criarProdutoDTO.getDescricao(), criarProdutoDTO.getCodigo(),
+					criarProdutoDTO.getPreco(), criarProdutoDTO.isEstoque(),
+					vendedor, categoria);
+			
+			vendedorService.adicionarProduto(vendedor, produto);
 
-		repository.salvar(produto);
+			repository.salvar(produto);
+			
+			return produto;
+		}
+		
+		return null;
 
-		return produto;
 	}
 
 	public Collection<Produto> listar() {
