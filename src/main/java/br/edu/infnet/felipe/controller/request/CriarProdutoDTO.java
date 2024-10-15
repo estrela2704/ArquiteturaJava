@@ -14,7 +14,7 @@ public class CriarProdutoDTO {
 	private String descricaoCategoria;
 
 	public CriarProdutoDTO(String nome, String descricao, int codigo,
-			BigDecimal preco, boolean estoque, String idVendedor,
+			BigDecimal preco, boolean estoque, String idVendedor,	
 			String nomeCategoria, String descricaoCategoria) {
 		super();
 		this.nome = nome;

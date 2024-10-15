@@ -16,6 +16,7 @@ public class UsuarioRepositoryIMPL implements UsuarioRepository {
 	private Map<UUID, Usuario> mapUsuarios = new HashMap<UUID, Usuario>();
 
 	public void salvar(Usuario usuario) {
+		System.out.println("Salvando usuario: " + usuario.getNome());
 		mapUsuarios.put(usuario.getId(), usuario);		
 	}
 

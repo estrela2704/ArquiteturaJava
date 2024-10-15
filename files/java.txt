@@ -1,4 +1,17 @@
-V;05484257108;Claudio;Nunes;felipeestrelatv@gmail.com;2003-04-27;61991248170;73070045
-P;Iphone 16;Celular Apple IPhone 16 Pro Max;2154;7999.99;true;Apple;Iphone 15;05484257108
-P;Macbook Air M3;Notebook Apple Macbook Air M3;2154;11999.99;true;Apple;Macbook Air;05484257108
-P;Samsung Galaxy s24;Celular Samsung s22;2154;3999.99;true;Samsung;Galaxy s22;05484257108
+U;Claudio;Nunes;claudionunes@example.com;2003-04-27;61991248170;05484257108;73070045;Rua Exemplo;Apto 101;Centro;Brasília;DF;ADMIN;senhaSegura123
+U;Ana;Silva;ana.silva@gmail.com;1995-03-15;61991248171;05484257109;73070046;Rua das Flores;Casa 5;Jardim;São Paulo;SP;CLIENTE;senhaSegura456
+U;Bruno;Souza;bruno.souza@gmail.com;1998-05-22;61991248172;05484257110;73070047;Av. Brasil;Apartamento 202;Centro;Rio de Janeiro;RJ;CLIENTE;senhaSegura789
+U;Carla;Oliveira;carla.oliveira@gmail.com;1990-08-30;61991248173;05484257111;73070048;Rua Verde;Casa 3;Vila Nova;Belo Horizonte;MG;CLIENTE;senhaSegura321
+U;Daniel;Pereira;daniel.pereira@gmail.com;1988-12-01;61991248174;05484257112;73070049;Rua da Paz;Apto 12;Bairro Alto;Curitiba;PR;VENDEDOR;senhaSegura654
+U;Elias;Costa;elias.costa@gmail.com;1992-06-18;61991248175;05484257113;73070050;Rua do Sol;Casa 10;Lapa;Porto Alegre;RS;VENDEDOR;senhaSegura987
+
+P;Samsung Galaxy S24;Celular Samsung S24 com câmera de alta resolução;2154;3999.99;true;05484257113;Eletrônicos;Produtos eletrônicos variados
+P;Iphone 16;Celular Apple IPhone 16 Pro Max;2155;7999.99;true;05484257112;Eletrônicos;Produtos eletrônicos variados
+P;Macbook Air M3;Notebook Apple Macbook Air M3;2156;11999.99;true;05484257112;Eletrônicos;Produtos eletrônicos variados
+P;Dell XPS 13;Notebook Dell XPS 13;2157;8999.99;true;05484257112;Eletrônicos;Produtos eletrônicos variados
+P;Sony WH-1000XM4;Fones de ouvido Sony com cancelamento de ruído;2158;1999.99;true;05484257113;Acessórios;Fones de ouvido
+P;Apple Watch Series 8;Relógio inteligente da Apple;2159;3499.99;true;05484257112;Acessórios;Relógios
+P;Google Pixel 7;Celular Google Pixel 7 com câmera de alta resolução;2160;2999.99;true;05484257113;Eletrônicos;Produtos eletrônicos variados
+P;Smart TV Samsung 55";TV Samsung de 55 polegadas 4K;2161;4999.99;true;05484257112;Eletrodomésticos;Televisores
+P;Nintendo Switch;Console de videogame Nintendo Switch;2162;2499.99;true;05484257113;Jogos;Videogames
+P;Kindle Paperwhite;Leitor de livros digitais Kindle;2163;899.99;true;05484257112;Acessórios;Leitores digitais

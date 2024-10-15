@@ -18,6 +18,8 @@ public class ProdutoRepositoryIMPL implements ProdutoRepository {
 	private Map<UUID, Produto> mapProdutos = new HashMap<UUID, Produto>();
 
 	public void salvar(Produto produto) {
+		System.out.println("Salvando produto: " + produto.getNome());
+
 		mapProdutos.put(produto.getId(), produto);		
 	}
 
