@@ -1,7 +1,7 @@
 package br.edu.infnet.felipe.controller.request;
 
 
-public class RemoverProdutoCarrinhoDTO {
+public class AdicionarProdutoCarrinhoDTO {
 
 	private String idCarrinho;
 	private String idProduto;

@@ -54,8 +54,8 @@ public class ProdutoService {
 		return repository.listar();
 	}
 
-	public Produto buscarPorID(UUID id) {
-		return repository.buscarPorID(id);
+	public Produto buscarPorID(String id) {
+		return repository.buscarPorID(UUID.fromString(id));
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.edu.infnet.felipe.domain.pagamento;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.edu.infnet.felipe.domain.enums.MetodoPagamento;
@@ -9,7 +10,7 @@ import br.edu.infnet.felipe.domain.usuario.Cliente;
 public class Pagamento {
 	
 	private Cliente cliente;
-	private float valor;
+	private BigDecimal valor;
 	private LocalDate dataPagamento;
 	private MetodoPagamento metodoPagamento;
 	private StatusPagamento status;
@@ -20,10 +21,10 @@ public class Pagamento {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public float getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	public LocalDate getDataPagamento() {

@@ -71,8 +71,8 @@ public class CarrinhoServiceTests {
 	public void testCriar() {
 		when(produto.getPreco()).thenReturn(new BigDecimal("10.00"));
 		when(produto.isEstoque()).thenReturn(true);
-		when(produtoService.buscarPorID(produto.getId())).thenReturn(produto);
-		when(clienteService.buscarPorID(cliente.getId())).thenReturn(cliente);
+		when(produtoService.buscarPorID(produto.getId().toString())).thenReturn(produto);
+		when(clienteService.buscarPorID(cliente.getId().toString())).thenReturn(cliente);
 		when(carrinhoRepository.buscarPorClienteId(cliente.getId())).thenReturn(null);
 
 		
@@ -97,7 +97,7 @@ public class CarrinhoServiceTests {
 		carrinho.addProduto(produto, 1);
 		
 		RemoverProdutoCarrinhoDTO dto = new RemoverProdutoCarrinhoDTO();
-		dto.setIdUsuario(cliente.getId().toString());
+		dto.setIdCarrinho(carrinho.getId().toString());
 		dto.setIdProduto(produto.getId().toString());
 		dto.setQuantidade(0);
 

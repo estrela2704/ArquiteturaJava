@@ -1,7 +1,9 @@
 package br.edu.infnet.felipe.repository.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,12 +29,14 @@ public class CarrinhoRepositoryIMPL implements CarrinhoRepository {
 		return mapCarrinhos.get(id);
 	}
 
-	public Carrinho buscarPorClienteId(UUID id) {		
+	public List<Carrinho> buscarPorClienteId(UUID id) {
+		List<Carrinho> carrinhos = new ArrayList<>();
+		
 		for(Carrinho carrinho: mapCarrinhos.values()) {
 			if(id.equals(carrinho.getComprador().getId())) {
-				return carrinho;
+				carrinhos.add(carrinho);
 			}
 		}
-		return null;
+		return carrinhos;
 	}
 }

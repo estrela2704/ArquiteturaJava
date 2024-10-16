@@ -1,8 +1,7 @@
 package br.edu.infnet.felipe.domain.enums;
 
 public enum StatusCompra {
-	ABERTO,
-	FECHADO,
+	PENDENTE,
 	PAGO,
 	ENVIADO,
 	RECEBIDO

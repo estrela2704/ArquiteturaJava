@@ -36,7 +36,7 @@ public class ProdutoController {
 
 	@GetMapping("/produto/{id}")
 	public ResponseEntity<Produto> buscarPorID(@PathVariable String id) {
-		Produto produto = produtoService.buscarPorID(UUID.fromString(id));
+		Produto produto = produtoService.buscarPorID(id);
 		return ResponseEntity.ok(produto);
 	}
 

@@ -34,8 +34,8 @@ public class ClienteService {
 		return listaClientes.values();
 	}
 	
-	public Cliente buscarPorID(UUID id) {
-		Usuario usuario = service.buscarPorID(id);
+	public Cliente buscarPorID(String id) {
+		Usuario usuario = service.buscarPorID(UUID.fromString(id));
 		
 		return usuario instanceof Cliente ? (Cliente) usuario : null;
 	}
