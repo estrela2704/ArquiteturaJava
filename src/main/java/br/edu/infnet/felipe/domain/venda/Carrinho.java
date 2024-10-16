@@ -1,5 +1,6 @@
 package br.edu.infnet.felipe.domain.venda;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,19 +27,34 @@ public class Carrinho {
 		return produtos;
 	}
 	
-	public void addProduto(Produto produto, int quantidade) {
+	public boolean addProduto(Produto produto, int quantidade) {
+        quantidade = Math.max(1, quantidade);
+
+        if(!produto.isEstoque()) {
+        	return false;
+        }
+        
 		for(int i = 0; i < quantidade; i++) {
 			this.produtos.add(produto);
-		}
+		}	
+    		
+    	return true;
 	}
 	
-	public void removerProduto(Produto produto, int quantidade) {
+	public boolean removerProduto(Produto produto, int quantidade) {
+        quantidade = Math.max(1, quantidade);
+		
 		int quantidadeProduto = getQuantidadeProdutoCarrinho(produto);
-		if(quantidade <= produtos.size() && quantidade <= quantidadeProduto) {
-			for(int i = 0; i < quantidade; i++) {
-				this.produtos.remove(produto);
-			}	
+		
+		if(quantidade >= produtos.size() | quantidade >= quantidadeProduto | produtos.size() == 0) {
+			return false;
 		}
+		
+		for(int i = 0; i < quantidade; i++) {
+			this.produtos.remove(produto);
+		}
+		
+		return true;
 	}
 	
 	public int getQuantidadeProdutoCarrinho(Produto produto) {
@@ -52,8 +68,20 @@ public class Carrinho {
 		return quantidade;
 	}
 	
+	public BigDecimal calcularPrecoCarrinho() {
+
+		BigDecimal preco = new BigDecimal(0);
+
+		for (Produto produto : produtos) {
+			preco = preco.add(produto.getPreco());
+		}
+
+		return preco;
+	}
+	
 	public Cliente getComprador() {
 		return comprador;
 	}
+	
 	
 }

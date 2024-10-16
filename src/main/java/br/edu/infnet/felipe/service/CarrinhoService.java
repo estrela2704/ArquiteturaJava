@@ -1,20 +1,23 @@
 package br.edu.infnet.felipe.service;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.felipe.controller.request.CriarCarrinhoDTO;
+import br.edu.infnet.felipe.controller.request.RemoverProdutoCarrinhoDTO;
 import br.edu.infnet.felipe.domain.produto.Produto;
 import br.edu.infnet.felipe.domain.usuario.Cliente;
 import br.edu.infnet.felipe.domain.venda.Carrinho;
+import br.edu.infnet.felipe.repository.CarrinhoRepository;
 
 @Service
 public class CarrinhoService {
 
+	@Autowired
+	private CarrinhoRepository repository;
+	
 	@Autowired
 	private ClienteService clienteService;
 
@@ -23,42 +26,64 @@ public class CarrinhoService {
 	
 	public Carrinho criar(CriarCarrinhoDTO criarCarrinhoDTO) {
 		
-		Cliente cliente = clienteService.buscarPorID(UUID.fromString(criarCarrinhoDTO.getIdUsuario()));
+		
+		Carrinho carrinho = getCarrinhoPorIdCliente(criarCarrinhoDTO.getIdUsuario());
+		
 		Produto produto = produtoService.buscarPorID(UUID.fromString(criarCarrinhoDTO.getIdProduto()));
 		
-		Carrinho carrinho = null;
-		
-		if(cliente != null && produto != null) {
-			carrinho = new Carrinho(cliente);
-			adicionarProduto(carrinho, produto, criarCarrinhoDTO.getQuantidade());
-			
+		if(produto == null) {
+			return null;
 		}
+		
+		carrinho.addProduto(produto, criarCarrinhoDTO.getQuantidade());
+		
+		repository.salvar(carrinho);
+		
+		return carrinho;
+	}
+	
+	public Carrinho getCarrinhoPorIdCliente(String id) {
+		
+		Cliente cliente = clienteService.buscarPorID(UUID.fromString(id));	
+		
+		if(cliente == null) {
+			return null;
+		}
+		
+		return retornaOuCriaCarrinhoPorCliente(cliente);	
+	}
+
+	public Carrinho removerProduto(RemoverProdutoCarrinhoDTO removerProdutoCarrinhoDTO) {
+		
+		Produto produto = produtoService.buscarPorID(UUID.fromString(removerProdutoCarrinhoDTO.getIdProduto()));
+		
+		if(produto == null) {
+			return null;
+		}
+		
+		Carrinho carrinho = repository.buscarPorClienteId(UUID.fromString(removerProdutoCarrinhoDTO.getIdUsuario()));
+
+		if(carrinho == null | carrinho.getProdutos().size() <= 0) {
+			return null;
+		}
+		
+		carrinho.removerProduto(produto, removerProdutoCarrinhoDTO.getQuantidade());
+		
+		repository.salvar(carrinho);
 		
 		return carrinho;
 	}
 
-	public void adicionarProduto(Carrinho carrinho, Produto produto,
-			int quantidade) {
-		if (produto.isEstoque()) {
-			quantidade = Math.max(1, quantidade);
-			carrinho.addProduto(produto, quantidade);
+	
+	private Carrinho retornaOuCriaCarrinhoPorCliente(Cliente cliente) {
+		
+		Carrinho carrinho = repository.buscarPorClienteId(cliente.getId());
+		
+		if(carrinho == null) {
+			carrinho = new Carrinho(cliente);
 		}
-	}
-
-	public void removerProduto(Carrinho carrinho, Produto produto, int quantidade) {
-		carrinho.removerProduto(produto, quantidade);
-	}
-
-	public BigDecimal calcularPrecoCarrinho(Carrinho carrinho) {
-		List<Produto> produtos = carrinho.getProdutos();
-
-		BigDecimal preco = new BigDecimal(0);
-
-		for (Produto produto : produtos) {
-			preco = preco.add(produto.getPreco());
-		}
-
-		return preco;
+		
+		return carrinho;
 	}
 
 }
