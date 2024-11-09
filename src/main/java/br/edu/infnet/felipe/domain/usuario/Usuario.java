@@ -1,27 +1,51 @@
 package br.edu.infnet.felipe.domain.usuario;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import br.edu.infnet.felipe.domain.enums.UsuarioRole;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_role", discriminatorType = DiscriminatorType.STRING) // Alterado para user_role
 public abstract class Usuario extends Pessoa {
 
-	private UUID id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+    
+    @Column(unique = true, nullable = false)
 	private String email;
+    
 	private String password;
+	
+    @Enumerated(EnumType.STRING)
 	private UsuarioRole role;
+    
+    public Usuario() {
+    	super();
+    }
 	
 	public Usuario(String cpf, String nome, String sobrenome, String email,
 			LocalDate dataNascimento, String telefone, Endereco endereco, String password, UsuarioRole role) {
 		super(cpf, nome, sobrenome, dataNascimento, telefone, endereco);
-		this.id = UUID.randomUUID();
 		this.email = email;
 		this.password = password;
 		this.role = role;
 	}
 	
-	public UUID getId() {
+	public Integer getId() {
 		return id;
 	}
 	

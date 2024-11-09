@@ -1,6 +1,7 @@
 package br.edu.infnet.felipe.service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,22 +63,22 @@ public class UsuarioService {
 		}
 
 		if(usuario != null) {
-			repository.salvar(usuario);
+			repository.save(usuario);
 		}
 		
 		return usuario;
 	}
 	
 	public void salvar(Usuario usuario) {
-		repository.salvar(usuario);
+		repository.save(usuario);
 	}
 
 	public Collection<Usuario> listar() {
-		return repository.listar();
+		return repository.findAll();
 	}
 
-	public Usuario buscarPorID(UUID id) {
-		return repository.buscarPorID(id);
+	public Optional<Usuario> buscarPorID(Integer id) {
+		return repository.findById(id);
 	}
 	
 }

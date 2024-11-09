@@ -1,18 +1,10 @@
 package br.edu.infnet.felipe;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.infnet.felipe.controller.request.CriarCarrinhoDTO;
 import br.edu.infnet.felipe.controller.request.CriarProdutoDTO;
@@ -26,6 +18,15 @@ import br.edu.infnet.felipe.service.ClienteService;
 import br.edu.infnet.felipe.service.ProdutoService;
 import br.edu.infnet.felipe.service.UsuarioService;
 import br.edu.infnet.felipe.service.VendedorService;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class Loader implements ApplicationRunner {
@@ -42,8 +43,6 @@ public class Loader implements ApplicationRunner {
     @Autowired
     private VendedorService vendedorService;
 
-    @Autowired
-    private CarrinhoService carrinhoService;
     
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -97,9 +96,7 @@ public class Loader implements ApplicationRunner {
                     criarUsuario(dados);
                 } else if ("P".equals(dados[0])) {
                     criarProduto(dados);
-                } else if ("C".equals(dados[0])) {
-                	criarCarrinho(dados);
-                }
+                } 
             }
             
         } catch (IOException e) {
@@ -129,11 +126,9 @@ public class Loader implements ApplicationRunner {
         usuarioService.criar(usuarioDTO);
     }
 
+    @Transactional
     private void criarProduto(String[] dados) {
-
         Map<String, Vendedor> mapVendedores = loadVendedoresMap();
-        
-      
         Vendedor vendedor = mapVendedores.get(dados[6]);
         
         if(vendedor != null) {
@@ -143,29 +138,12 @@ public class Loader implements ApplicationRunner {
                     Integer.parseInt(dados[3]), // codigo
                     new BigDecimal(dados[4]), // preco
                     Boolean.parseBoolean(dados[5]), // estoque
-                    vendedor.getId().toString(), // idVendedor
+                    vendedor.getId(), // idVendedor
                     dados[7], // nomeCategoria
                     dados[8]  // descricaoCategoria
             );
             produtoService.criar(produtoDTO);
         }
-        
-    }
-    
-    private void criarCarrinho(String[] dados) {
-    	
-        Map<String, Cliente> mapClientes = loadClientesMap();
-        Map<String, Produto> mapProdutos = loadProdutoMap();
-        
-        Cliente cliente = mapClientes.get(dados[1]);
-    	Produto produto = mapProdutos.get(dados[2]);
-    	
-        CriarCarrinhoDTO carrinhoDTO = new CriarCarrinhoDTO();
-        carrinhoDTO.setIdUsuario(cliente.getId().toString()); // CPF do usuário
-        carrinhoDTO.setIdProduto(produto.getId().toString()); // Código do produto
-        carrinhoDTO.setQuantidade(Integer.parseInt(dados[3])); // Quantidade
-        
-        carrinhoService.criar(carrinhoDTO);
     }
 
     private UsuarioRole mapRole(String role) {
@@ -180,5 +158,4 @@ public class Loader implements ApplicationRunner {
                 throw new IllegalArgumentException("Role inválida: " + role);
         }
     }
-
 }

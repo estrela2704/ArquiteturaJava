@@ -3,85 +3,111 @@ package br.edu.infnet.felipe.domain.venda;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.edu.infnet.felipe.domain.produto.Produto;
 import br.edu.infnet.felipe.domain.usuario.Cliente;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
+@Entity
 public class Carrinho {
-	
-	private UUID id;
-	private List<Produto> produtos = new ArrayList<Produto>();
-	private Cliente comprador;
-	
-	public Carrinho(Cliente comprador) {
-		this.id = UUID.randomUUID();
-		this.comprador = comprador;
-	}
-	
-	public UUID getId() {
-		return id;
-	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-	
-	public boolean addProduto(Produto produto, int quantidade) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<ItemCarrinho> itens = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
+
+    public Carrinho() {
+    }
+
+    public Carrinho(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public List<ItemCarrinho> getItens() {
+        return itens;
+    }
+
+    public boolean addProduto(Produto produto, int quantidade) {
         quantidade = Math.max(1, quantidade);
 
-        if(!produto.isEstoque()) {
-        	return false;
+        if (!produto.isEstoque()) {
+            return false;
         }
-        
-		for(int i = 0; i < quantidade; i++) {
-			this.produtos.add(produto);
-		}	
-    		
-    	return true;
-	}
-	
-	public boolean removerProduto(Produto produto, int quantidade) {
+
+        // Verificar se o produto já está no carrinho
+        for (ItemCarrinho item : itens) {
+            if (item.getProduto().getId().equals(produto.getId())) {
+                item.adicionarQuantidade(quantidade); // Apenas adicionar a quantidade ao item existente
+                return true;
+            }
+        }
+
+        // Criar um novo item no carrinho se o produto não existir
+        ItemCarrinho novoItem = new ItemCarrinho(produto, quantidade);
+        novoItem.setCarrinho(this);  // Associar o item ao carrinho
+        itens.add(novoItem);
+
+        return true;
+    }
+
+
+    public boolean removerProduto(Produto produto, int quantidade) {
         quantidade = Math.max(1, quantidade);
-		
-		int quantidadeProduto = getQuantidadeProdutoCarrinho(produto);
-		
-		if(quantidade >= produtos.size() | quantidade >= quantidadeProduto | produtos.size() == 0) {
-			return false;
-		}
-		
-		for(int i = 0; i < quantidade; i++) {
-			this.produtos.remove(produto);
-		}
-		
-		return true;
-	}
-	
-	public int getQuantidadeProdutoCarrinho(Produto produto) {
-		int quantidade = 0;
-		for(Produto objProduto: produtos) {
-			if(objProduto.getId() == produto.getId()) {
-				quantidade++;
-			}
-		}
-		
-		return quantidade;
-	}
-	
-	public BigDecimal calcularPrecoCarrinho() {
 
-		BigDecimal preco = new BigDecimal(0);
+        for (ItemCarrinho item : itens) {
+            if (item.getProduto().getId().equals(produto.getId())) {
+                if (item.getQuantidade() < quantidade) {
+                    return false; // Não tem quantidade suficiente no carrinho
+                }
+                item.removerQuantidade(quantidade); // Remove a quantidade
+                return true;
+            }
+        }
 
-		for (Produto produto : produtos) {
-			preco = preco.add(produto.getPreco());
-		}
+        return false; // Produto não encontrado no carrinho
+    }
 
-		return preco;
-	}
-	
-	public Cliente getComprador() {
-		return comprador;
-	}
-	
-	
+    public int getQuantidadeProdutoCarrinho(Produto produto) {
+        for (ItemCarrinho item : itens) {
+            if (item.getProduto().getId().equals(produto.getId())) {
+                return item.getQuantidade(); // Retorna a quantidade do item no carrinho
+            }
+        }
+        return 0; // Produto não encontrado
+    }
+
+    public BigDecimal calcularPrecoCarrinho() {
+        BigDecimal preco = BigDecimal.ZERO;
+
+        for (ItemCarrinho item : itens) {
+            // Multiplica o preço do produto pela quantidade no carrinho
+            preco = preco.add(item.getProduto().getPreco().multiply(new BigDecimal(item.getQuantidade())));
+        }
+
+        return preco;
+    }
+
+    public Cliente getComprador() {
+        return cliente;
+    }
 }

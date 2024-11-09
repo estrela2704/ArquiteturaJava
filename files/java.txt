@@ -15,7 +15,3 @@ P;Google Pixel 7;Celular Google Pixel 7 com câmera de alta resolução;2160;299
 P;Smart TV Samsung 55";TV Samsung de 55 polegadas 4K;2161;4999.99;true;05484257112;Eletrodomésticos;Televisores
 P;Nintendo Switch;Console de videogame Nintendo Switch;2162;2499.99;true;05484257113;Jogos;Videogames
 P;Kindle Paperwhite;Leitor de livros digitais Kindle;2163;899.99;true;05484257112;Acessórios;Leitores digitais
-
-C;05484257111;2154;2
-C;05484257109;2155;1
-C;05484257110;2156;3

@@ -1,25 +1,44 @@
 package br.edu.infnet.felipe.domain.venda;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import br.edu.infnet.felipe.domain.enums.StatusCompra;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class OrdemCompra {
 	
-	private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+    
+    @ManyToOne 
+    @JoinColumn(name = "carrinho_id", nullable = false) 
 	private Carrinho carrinho;
+    
 	private BigDecimal valor;
+	
+    @Enumerated(EnumType.STRING)
 	private StatusCompra status;
 	
+    public OrdemCompra() {
+    	
+    }
+    
 	public OrdemCompra(Carrinho carrinho) {
-		this.id = UUID.randomUUID();
 		this.carrinho = carrinho;
 		this.valor = this.carrinho.calcularPrecoCarrinho();
 		status = StatusCompra.PENDENTE;
 	}
 
-	public UUID getId() {
+	public Integer getId() {
 		return id;
 	}
 	

@@ -1,7 +1,7 @@
 package br.edu.infnet.felipe.service;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,83 +28,81 @@ public class CarrinhoService {
 	
 	public Carrinho criar(CriarCarrinhoDTO criarCarrinhoDTO) {
 		
-		Cliente cliente = clienteService.buscarPorID(criarCarrinhoDTO.getIdUsuario());	
+		Optional<Cliente> cliente = clienteService.buscarPorID(criarCarrinhoDTO.getIdUsuario());	
 		
-		if(cliente == null) {
+		if(cliente.isEmpty()) {
+			System.out.println("é null");
 			return null;
 		}
 		
-		Carrinho carrinho = new Carrinho(cliente);
+		Carrinho carrinho = new Carrinho(cliente.get());
 		
-		Produto produto = produtoService.buscarPorID(criarCarrinhoDTO.getIdProduto());
+		Optional<Produto> produto = produtoService.buscarPorID(criarCarrinhoDTO.getIdProduto());
 		
-		if(produto == null) {
-			System.out.println("Produto");
+		if(produto.isEmpty()) {
+			System.out.println("é null2");
 			return null;
 		}
 		
-		carrinho.addProduto(produto, criarCarrinhoDTO.getQuantidade());
+		carrinho.addProduto(produto.get(), criarCarrinhoDTO.getQuantidade());
 		
-		repository.salvar(carrinho);
+		repository.save(carrinho);
 		
 		return carrinho;
 	}
 	
-	public List<Carrinho> getCarrinhoPorIdCliente(String id) {
+	public List<Carrinho> getCarrinhoPorIdCliente(Integer id) {
 		
-		Cliente cliente = clienteService.buscarPorID(id);	
+		Optional<Cliente> cliente = clienteService.buscarPorID(id);	
 		
-		if(cliente == null) {
+		if(cliente.isEmpty()) {
 			return null;
 		}
 		
-		return repository.buscarPorClienteId(cliente.getId());	
+		return repository.findByClienteId(cliente.get().getId());	
 	}
 	
 	public Carrinho adicionarProduto(AdicionarProdutoCarrinhoDTO adicionarProdutoCarrinhoDTO) {
 		
-		Produto produto = produtoService.buscarPorID(adicionarProdutoCarrinhoDTO.getIdProduto());
+		Optional<Produto> produto = produtoService.buscarPorID(adicionarProdutoCarrinhoDTO.getIdProduto());
 		
-		if(produto == null) {
+		if(produto.isEmpty()) {
 			return null;
 		}
 		
-		Carrinho carrinho = repository.buscarPorID(UUID.fromString(adicionarProdutoCarrinhoDTO.getIdCarrinho()));
+		Optional<Carrinho> carrinho = repository.findById(adicionarProdutoCarrinhoDTO.getIdCarrinho());
 		
-		if(carrinho == null) {
+		if(carrinho.isEmpty()) {
 			return null;
 		}
 		
-		carrinho.addProduto(produto, adicionarProdutoCarrinhoDTO.getQuantidade());
 		
-		repository.salvar(carrinho);
+		carrinho.get().addProduto(produto.get(), adicionarProdutoCarrinhoDTO.getQuantidade());
 		
-		return carrinho;
+		return repository.save(carrinho.get());
 	}
 
 	public Carrinho removerProduto(RemoverProdutoCarrinhoDTO removerProdutoCarrinhoDTO) {
 		
-		Produto produto = produtoService.buscarPorID(removerProdutoCarrinhoDTO.getIdProduto());
+		Optional<Produto> produto = produtoService.buscarPorID(removerProdutoCarrinhoDTO.getIdProduto());
 		
-		if(produto == null) {
+		if(produto.isEmpty()) {
 			return null;
 		}
 		
-		Carrinho carrinho = repository.buscarPorID(UUID.fromString(removerProdutoCarrinhoDTO.getIdCarrinho()));
+		Optional<Carrinho> carrinho = repository.findById(removerProdutoCarrinhoDTO.getIdCarrinho());
+		
+		if(carrinho.isEmpty() | carrinho.get().getItens().size() <= 0) {
+			return null;
+		}
 
-		if(carrinho == null | carrinho.getProdutos().size() <= 0) {
-			return null;
-		}
+		carrinho.get().removerProduto(produto.get(), removerProdutoCarrinhoDTO.getQuantidade());
 		
-		carrinho.removerProduto(produto, removerProdutoCarrinhoDTO.getQuantidade());
-		
-		repository.salvar(carrinho);
-		
-		return carrinho;
+		return repository.save(carrinho.get());
 	}
 	
-	public Carrinho buscaPorId(String id) {
-		return repository.buscarPorID(UUID.fromString(id));
+	public Optional<Carrinho> buscaPorId(Integer id) {
+		return repository.findById(id);
 	}
 
 }

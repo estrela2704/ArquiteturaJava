@@ -3,20 +3,20 @@ package br.edu.infnet.felipe.controller.request;
 
 public class CriarCarrinhoDTO {
 
-	private String idUsuario;
-	private String idProduto;
+	private Integer idUsuario;
+	private Integer idProduto;
 	private int quantidade = 0;
 	
-	public String getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	public String getIdProduto() {
+	public Integer getIdProduto() {
 		return idProduto;
 	}
-	public void setIdProduto(String idProduto) {
+	public void setIdProduto(Integer idProduto) {
 		this.idProduto = idProduto;
 	}
 	

@@ -3,16 +3,28 @@ package br.edu.infnet.felipe.domain.usuario;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Pessoa {
 	
 	private String nome;
 	private String sobrenome;
 	private LocalDate dataNascimento;
 	private String telefone;
+	
+	@Embedded
 	private Endereco endereco;
+	
+    @Column(unique = true, nullable = false)
 	private String cpf;
 
-	
+	public Pessoa() {
+		
+	}
+    
 	public Pessoa(String cpf, String nome, String sobrenome, LocalDate dataNascimento, String telefone,
 			Endereco endereco) {
 		this.nome = nome;

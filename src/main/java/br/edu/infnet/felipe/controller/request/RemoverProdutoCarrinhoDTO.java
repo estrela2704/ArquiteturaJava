@@ -3,21 +3,21 @@ package br.edu.infnet.felipe.controller.request;
 
 public class RemoverProdutoCarrinhoDTO {
 
-	private String idCarrinho;
-	private String idProduto;
+	private Integer idCarrinho;
+	private Integer idProduto;
 	private int quantidade = 0;
 	
-	public String getIdCarrinho() {
+	public Integer getIdCarrinho() {
 		return idCarrinho;
 	}
-	public void setIdCarrinho(String idCarrinho) {
+	public void setIdCarrinho(Integer idCarrinho) {
 		this.idCarrinho = idCarrinho;
 	}
 	
-	public String getIdProduto() {
+	public Integer getIdProduto() {
 		return idProduto;
 	}
-	public void setIdProduto(String idProduto) {
+	public void setIdProduto(Integer idProduto) {
 		this.idProduto = idProduto;
 	}
 	

@@ -1,5 +1,8 @@
 package br.edu.infnet.felipe.domain.usuario;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Endereco {
 	
 	private String cep;
@@ -8,6 +11,9 @@ public class Endereco {
 	private String bairro;
 	private String localidade;
 	private String uf;
+	
+    public Endereco() {
+    }
 	
 	public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade,
 			String uf) {

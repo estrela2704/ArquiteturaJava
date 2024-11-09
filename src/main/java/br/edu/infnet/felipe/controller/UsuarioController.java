@@ -1,7 +1,7 @@
 package br.edu.infnet.felipe.controller;
 
 import java.util.Collection;
-import java.util.UUID;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +34,9 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/usuario/{id}")
-	public ResponseEntity<Usuario> buscarPorID(@PathVariable String id){
-		Usuario usuario = usuarioService.buscarPorID(UUID.fromString(id));
-		return ResponseEntity.ok(usuario);
+	public ResponseEntity<Usuario> buscarPorID(@PathVariable Integer id){
+		Optional<Usuario> usuario = usuarioService.buscarPorID(id);
+		return ResponseEntity.ok(usuario.get());
 	}
 	
 }

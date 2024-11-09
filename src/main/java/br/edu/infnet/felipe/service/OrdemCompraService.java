@@ -1,6 +1,7 @@
 package br.edu.infnet.felipe.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +27,6 @@ public class OrdemCompraService {
 	
 	@Autowired
 	private OrdemCompraRepository repository;
-
-	public OrdemCompra criar(String carrinhoId, String clienteId) {
-		Carrinho carrinho = carrinhoService.buscaPorId(carrinhoId);
-		
-		if(carrinho == null) {
-			return null;
-		}
-		
-		List<Carrinho> listCarrinhosCliente = carrinhoService.getCarrinhoPorIdCliente(clienteId);
-		
-		boolean carrinhoPertenceCliente = false;
-		
-		for(Carrinho carrinhoObjeto: listCarrinhosCliente) {
-			if(carrinhoObjeto.getId() == carrinho.getId()) {
-				carrinhoPertenceCliente = true;
-			}
-		}
-		
-		if(!carrinhoPertenceCliente) {
-			return null;
-		}
-		
-		OrdemCompra ordemCompra = new OrdemCompra(carrinho);
-		
-		repository.salvar(ordemCompra);
-		
-		return ordemCompra;
-	}
 	
 	public OrdemCompra checkout(CheckoutDTO checkoutDTO) {
 		OrdemCompra ordemCompra = criar(checkoutDTO.getCarrinhoId(), checkoutDTO.getUsuarioId());
@@ -63,17 +36,16 @@ public class OrdemCompraService {
 		pagamento.setValor(ordemCompra.getCarrinho().calcularPrecoCarrinho());
 		
 		DadosPagamentoDTO dadosPagamento = checkoutDTO.getDadosPagamento();
-		
-		System.out.println(dadosPagamento.getMetodoPagamento());
-		
-		if(dadosPagamento.getMetodoPagamento().equals("CARTAO_CREDITO")) {
-			System.out.println("É CREDITO");
-			pagamento.setMetodoPagamento(MetodoPagamento.CARTAO_CREDITO);
-		}
-		
-		if(dadosPagamento.getMetodoPagamento().equals("PIX")) {
-			System.out.println("É PIX");
-			pagamento.setMetodoPagamento(MetodoPagamento.PIX);
+				
+		switch (dadosPagamento.getMetodoPagamento()) {
+		    case "CARTAO_CREDITO":
+		        pagamento.setMetodoPagamento(MetodoPagamento.CARTAO_CREDITO);
+		        break;
+		    case "PIX":
+		        pagamento.setMetodoPagamento(MetodoPagamento.PIX);
+		        break;
+	    default:
+	        return null;
 		}
 		
 		boolean pagamentoProcessado = pagamentoService.processarPagamento(pagamento, dadosPagamento);
@@ -82,24 +54,45 @@ public class OrdemCompraService {
 			ordemCompra.setStatus(StatusCompra.PAGO);
 		}
 		
-		repository.salvar(ordemCompra);
-		
-		return ordemCompra;
-		
+		return repository.save(ordemCompra);	
 	}
 	
-	private OrdemCompra alterarStatus(String ordemCompraId, StatusCompra statusNovo) {
-		OrdemCompra ordemCompra = repository.buscarPorID(UUID.fromString(ordemCompraId));
+	private OrdemCompra criar(Integer carrinhoId, Integer clienteId) {
+		Optional<Carrinho> carrinho = carrinhoService.buscaPorId(carrinhoId);
 		
-		if(ordemCompra == null) {
+		if(carrinho.isEmpty()) {
 			return null;
 		}
 		
-		ordemCompra.setStatus(statusNovo);
+		List<Carrinho> listCarrinhosCliente = carrinhoService.getCarrinhoPorIdCliente(clienteId);
 		
-		repository.salvar(ordemCompra);
+		boolean carrinhoPertenceCliente = false;
 		
-		return ordemCompra;
+		for(Carrinho carrinhoObjeto: listCarrinhosCliente) {
+			if(carrinhoObjeto.getId() == carrinho.get().getId()) {
+				carrinhoPertenceCliente = true;
+			}
+		}
+		
+		if(!carrinhoPertenceCliente) {
+			return null;
+		}
+		
+		OrdemCompra ordemCompra = new OrdemCompra(carrinho.get());
+		
+		return repository.save(ordemCompra);
+	}
+	
+	private OrdemCompra alterarStatus(Integer ordemCompraId, StatusCompra statusNovo) {
+		Optional<OrdemCompra> ordemCompra = repository.findById(ordemCompraId);
+		
+		if(ordemCompra.isEmpty()) {
+			return null;
+		}
+		
+		ordemCompra.get().setStatus(statusNovo);
+		
+		return repository.save(ordemCompra.get());
 	}
 
 }

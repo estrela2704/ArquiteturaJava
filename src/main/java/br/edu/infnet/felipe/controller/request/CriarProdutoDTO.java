@@ -9,12 +9,12 @@ public class CriarProdutoDTO {
 	private int codigo;
 	private BigDecimal preco;
 	private boolean estoque;
-	private String idVendedor;
+	private Integer idVendedor;
 	private String nomeCategoria;
 	private String descricaoCategoria;
 
 	public CriarProdutoDTO(String nome, String descricao, int codigo,
-			BigDecimal preco, boolean estoque, String idVendedor,	
+			BigDecimal preco, boolean estoque, Integer idVendedor,	
 			String nomeCategoria, String descricaoCategoria) {
 		super();
 		this.nome = nome;
@@ -47,7 +47,7 @@ public class CriarProdutoDTO {
 		return estoque;
 	}
 
-	public String getIdVendedor() {
+	public Integer getIdVendedor() {
 		return idVendedor;
 	}
 

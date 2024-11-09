@@ -5,29 +5,29 @@ import java.math.BigDecimal;
 
 public class CheckoutDTO {
     
-    private String usuarioId;
-    private String carrinhoId;
+    private Integer usuarioId;
+    private Integer carrinhoId;
     private DadosPagamentoDTO dadosPagamento;
 
-    public CheckoutDTO(String usuarioId, String carrinhoId, DadosPagamentoDTO dadosPagamento, BigDecimal valorTotal) {
+    public CheckoutDTO(Integer usuarioId, Integer carrinhoId, DadosPagamentoDTO dadosPagamento, BigDecimal valorTotal) {
         this.usuarioId = usuarioId;
         this.carrinhoId = carrinhoId;
         this.dadosPagamento = dadosPagamento;
     }
 
-    public String getUsuarioId() {
+    public Integer getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(String usuarioId) {
+    public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
 
-    public String getCarrinhoId() {
+    public Integer getCarrinhoId() {
 		return carrinhoId;
 	}
 
-	public void setCarrinhoId(String ordemCompraId) {
+	public void setCarrinhoId(Integer ordemCompraId) {
 		this.carrinhoId = ordemCompraId;
 	}
 

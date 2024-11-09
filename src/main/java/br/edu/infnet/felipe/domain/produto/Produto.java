@@ -1,26 +1,43 @@
 package br.edu.infnet.felipe.domain.produto;
 
 import java.math.BigDecimal;
-import java.util.UUID;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.edu.infnet.felipe.domain.usuario.Vendedor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Produto {
 	
-	private UUID id;
+	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+    
 	private String nome;
 	private String descricao;
 	private int codigo;
 	private BigDecimal preco;
 	private boolean estoque;
-	private Vendedor vendedor;
-	private Categoria categoria;
 	
+    @ManyToOne
+    @JoinColumn(name = "vendedor_id")
+    private Vendedor vendedor;
+	
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+	
+    public Produto() {
+    	
+    }
+    
 	public Produto(String nome, String descricao, int codigo, BigDecimal preco, boolean estoque, Vendedor vendedor,
 			Categoria categoria) {
-		this.id = UUID.randomUUID();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.codigo = codigo;
@@ -30,7 +47,7 @@ public class Produto {
 		this.categoria = categoria;
 	}
 	
-	public UUID getId() {
+	public Integer getId() {
 		return id;
 	}
 	

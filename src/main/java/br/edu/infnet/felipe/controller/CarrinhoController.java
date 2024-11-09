@@ -46,7 +46,7 @@ public class CarrinhoController {
 	}
 	
 	@GetMapping("/carrinho/{idCliente}")
-	public ResponseEntity<List<Carrinho>> retornarCarrinhoCliente(@PathVariable String idCliente){
+	public ResponseEntity<List<Carrinho>> retornarCarrinhoCliente(@PathVariable Integer idCliente){
 		List<Carrinho> carrinho = carrinhoService.getCarrinhoPorIdCliente(idCliente);
 		
 		return ResponseEntity.ok(carrinho);

@@ -1,17 +1,12 @@
 package br.edu.infnet.felipe.repository;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.edu.infnet.felipe.domain.produto.Produto;
-import br.edu.infnet.felipe.domain.usuario.Vendedor;
 
-@Repository
-public interface ProdutoRepository {
-	void salvar(Produto produto);
-	Collection<Produto> listar();
-	Produto buscarPorID(UUID id);
+public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
+    List<Produto> findByVendedorId(Integer vendedorId);
+    List<Produto> findByCategoriaId(Integer categoriaId);
 }
