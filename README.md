@@ -1,66 +1,43 @@
-
 # Sistema de E-commerce - README
-
 
 Este é um sistema de e-commerce desenvolvido em Java usando Spring Boot. A aplicação fornece uma API RESTful para gerenciar usuários, produtos, carrinhos de compras e ordens de compra.
 
 ## Tecnologias Utilizadas
+
 - Java 17
 - Spring Boot 3.3.4
 - Maven
 
 ## Estrutura do Projeto
+
 - Controller: Contém as classes controladoras que expõem os endpoints da API.
 - Domain: Contém as classes de domínio do sistema.
 - Service: Contém as classes de serviço que implementam a lógica de negócios.
 - Repository: Contém as classes de abstração de persistência e acesso a dados.
+
 ## Como Executar
+
 ### Pré-requisitos
-- JDK 17 instalado
-- Maven instalado
 
-### Passos para Executar
-
-1. Clonar o Repositório: 
-- git clone https://github.com/estrela2704/ArquiteturaJava.git
-
-
-### Carregamento Inicial de Dados
-A aplicação possui uma classe Loader que carrega dados iniciais a partir de um arquivo java.txt na pasta files. Este arquivo deve estar no seguinte formato:
-
-Exemplo de Formato do Arquivo java.txt:
-# Sistema de E-commerce - README
-
-
-Este é um sistema de e-commerce desenvolvido em Java usando Spring Boot. A aplicação fornece uma API RESTful para gerenciar usuários, produtos, carrinhos de compras e ordens de compra.
-
-## Tecnologias Utilizadas
-- Java 17
-- Spring Boot 3.3.4
-- Maven
-
-## Estrutura do Projeto
-- Controller: Contém as classes controladoras que expõem os endpoints da API.
-- Domain: Contém as classes de domínio do sistema.
-- Service: Contém as classes de serviço que implementam a lógica de negócios.
-- Repository: Contém as classes de abstração de persistência e acesso a dados.
-## Como Executar
-### Pré-requisitos
 - JDK 17 instalado
 - Maven instalado
 
 ### Passos para Executar
 
 #### 1. Clone o Repositório:
+
 - git clone https://github.com/estrela2704/ArquiteturaJava.git
 
 #### 2. Build do Projeto:
+
 - mvn clean install
 
 #### 3. Executar a Aplicação:
+
 - mvn spring-boot:run
 
-### Carregamento Inicial de Dados 
+### Carregamento Inicial de Dados
+
 A aplicação possui uma classe Loader que carrega dados iniciais a partir de um arquivo java.txt na pasta files.
 
 ### Acesso aos endpoints
