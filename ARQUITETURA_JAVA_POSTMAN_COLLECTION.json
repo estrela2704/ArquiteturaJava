@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "ee51802d-da7d-4e1e-9301-114e10fc3b81",
+		"name": "Java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29490852"
+	},
+	"item": [
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "CriarProduto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Samsung Galaxy S24\",\r\n  \"descricao\": \"Celular Samsung S24 com câmera de alta resolução\",\r\n  \"codigo\": 2154,\r\n  \"preco\": 3999.99,\r\n  \"estoque\": true,\r\n  \"idVendedor\": \"bb009b46-360a-418d-b162-e8977f36bd7d\",\r\n  \"nomeCategoria\": \"Eletrônicos\",\r\n  \"descricaoCategoria\": \"Produtos eletrônicos variados\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/produto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarProdutos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarProduto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Claudio\",\r\n  \"sobrenome\": \"Nunes\",\r\n  \"email\": \"claudionunes@example.com\",\r\n  \"dataNascimento\": \"2003-04-27\",\r\n  \"telefone\": \"61991248170\",\r\n  \"cpf\": \"05484257108\",\r\n  \"cep\": \"73070045\",\r\n  \"logradouro\": \"Rua Exemplo\",\r\n  \"complemento\": \"Apto 101\",\r\n  \"bairro\": \"Centro\",\r\n  \"localidade\": \"Brasília\",\r\n  \"uf\": \"DF\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/produto/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Vendedor",
+					"item": [
+						{
+							"name": "ListarVendedores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/vendedores",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendedores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ListarProdutosVendedor",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Claudio\",\r\n  \"sobrenome\": \"Nunes\",\r\n  \"email\": \"claudionunes@example.com\",\r\n  \"dataNascimento\": \"2003-04-27\",\r\n  \"telefone\": \"61991248170\",\r\n  \"cpf\": \"05484257108\",\r\n  \"cep\": \"73070045\",\r\n  \"logradouro\": \"Rua Exemplo\",\r\n  \"complemento\": \"Apto 101\",\r\n  \"bairro\": \"Centro\",\r\n  \"localidade\": \"Brasília\",\r\n  \"uf\": \"DF\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/vendedor/{id}/produtos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendedor",
+										"{id}",
+										"produtos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BuscarVendedor",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Claudio\",\r\n  \"sobrenome\": \"Nunes\",\r\n  \"email\": \"claudionunes@example.com\",\r\n  \"dataNascimento\": \"2003-04-27\",\r\n  \"telefone\": \"61991248170\",\r\n  \"cpf\": \"05484257108\",\r\n  \"cep\": \"73070045\",\r\n  \"logradouro\": \"Rua Exemplo\",\r\n  \"complemento\": \"Apto 101\",\r\n  \"bairro\": \"Centro\",\r\n  \"localidade\": \"Brasília\",\r\n  \"uf\": \"DF\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/vendedor/bb009b46-360a-418d-b162-e8977f36bd7d",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendedor",
+										"bb009b46-360a-418d-b162-e8977f36bd7d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BuscarUsuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Claudio\",\r\n  \"sobrenome\": \"Nunes\",\r\n  \"email\": \"claudionunes@example.com\",\r\n  \"dataNascimento\": \"2003-04-27\",\r\n  \"telefone\": \"61991248170\",\r\n  \"cpf\": \"05484257108\",\r\n  \"cep\": \"73070045\",\r\n  \"logradouro\": \"Rua Exemplo\",\r\n  \"complemento\": \"Apto 101\",\r\n  \"bairro\": \"Centro\",\r\n  \"localidade\": \"Brasília\",\r\n  \"uf\": \"DF\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/71d24f69-7671-4ae8-a2a9-a9e9ff35628b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"71d24f69-7671-4ae8-a2a9-a9e9ff35628b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n    \"nome\": \"Claudio\",\r\n    \"sobrenome\": \"Nunes\",\r\n    \"email\": \"claudionunes@example.com\",\r\n    \"dataNascimento\": \"2003-04-27\",\r\n    \"telefone\": \"61991248170\",\r\n    \"cpf\": \"05484257108\",\r\n    \"cep\": \"73070045\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"localidade\": \"Brasília\",\r\n    \"uf\": \"DF\",\r\n    \"role\": \"ADMIN\", // Substitua pelo valor correto da enumeração UsuarioRole\r\n    \"senha\": \"senhaSegura123\" // Adicione a senha aqui\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carrinho",
+			"item": [
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": \"2985d8e0-b319-4a1d-afc9-fd67f884a42b\",\r\n    \"carrinhoId\": \"977e5f51-2ef4-4550-97cf-eb40bd136967\",\r\n    \"dadosPagamento\": {\r\n        \"metodoPagamento\": \"CARTAO_CREDITO\",\r\n        \"numeroCartao\": \"1234567890123456\",\r\n        \"dataVencimento\": \"12/25\",\r\n        \"codigoSeguranca\": \"123\",\r\n        \"nomeTitular\": \"Felipe Silva\",\r\n        \"chavePix\": null\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/checkout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idUsuario\": 1,\r\n  \"idProduto\": 123,\r\n  \"quantidade\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/carrinho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"carrinho"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
